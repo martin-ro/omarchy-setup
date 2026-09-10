@@ -18,6 +18,7 @@ fi
 . "$DIR/install-stow.sh"
 . "$DIR/install-yazi.sh"
 . "$DIR/install-dotfiles.sh"
+. "$DIR/install-aliases.sh"
 . "$DIR/install-shell.sh"
 
 echo "Done."
