@@ -11,5 +11,6 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$DIR/install-stow.sh"
 . "$DIR/install-yazi.sh"
 . "$DIR/install-dotfiles.sh"
+. "$DIR/install-shell.sh"
 
 echo "Done."
