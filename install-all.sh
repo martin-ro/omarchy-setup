@@ -19,6 +19,7 @@ fi
 . "$DIR/install-grok.sh"
 . "$DIR/install-codex.sh"
 . "$DIR/install-claude-code.sh"
+. "$DIR/install-herdr.sh"
 . "$DIR/install-stow.sh"
 . "$DIR/install-yazi.sh"
 . "$DIR/install-dotfiles.sh"

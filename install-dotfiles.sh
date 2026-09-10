@@ -16,8 +16,8 @@ AFTER_HYPR="$(git -C "$DOTFILES" rev-parse HEAD:hyprland)"
 HYPR_CHANGED=false
 [ "$BEFORE_HYPR" = "$AFTER_HYPR" ] || HYPR_CHANGED=true
 
-mkdir -p "$HOME/.config/yazi" "$HOME/.config/hypr"
-rm -f "$HOME/.config/yazi/yazi.toml" "$HOME/.bash_aliases"
+mkdir -p "$HOME/.config/yazi" "$HOME/.config/hypr" "$HOME/.config/herdr"
+rm -f "$HOME/.config/yazi/yazi.toml" "$HOME/.config/herdr/config.toml" "$HOME/.bash_aliases"
 
 for FILE in looknfeel.lua bindings.lua; do
   SOURCE="$DOTFILES/hyprland/.config/hypr/$FILE"
@@ -29,7 +29,7 @@ for FILE in looknfeel.lua bindings.lua; do
   fi
 done
 
-stow --restow --dir="$DOTFILES" --target="$HOME" yazi hyprland bash
+stow --restow --dir="$DOTFILES" --target="$HOME" yazi hyprland bash herdr
 
 if [ "$HYPR_CHANGED" = true ]; then
   hyprctl reload
