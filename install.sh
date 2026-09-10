@@ -11,7 +11,7 @@ fi
 
 echo "Installing Bitwarden..."
 omarchy pkg add bitwarden bitwarden-cli
-setsid -f uwsm-app -- bitwarden >/dev/null 2>&1
+setsid -f uwsm-app -- gtk-launch bitwarden >/dev/null 2>&1
 read -rp "Log in to Bitwarden, then press Enter... "
 
 echo "Opening Chromium..."
