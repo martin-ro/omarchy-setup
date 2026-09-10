@@ -3,6 +3,13 @@
 set -e
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
+BEFORE_PULL="$(git -C "$DIR" rev-parse HEAD)"
+git -C "$DIR" pull --ff-only
+AFTER_PULL="$(git -C "$DIR" rev-parse HEAD)"
+
+if [ "$BEFORE_PULL" != "$AFTER_PULL" ]; then
+  exec "$DIR/install-all.sh" "$@"
+fi
 
 . "$DIR/install-chromium-account.sh"
 . "$DIR/install-tailscale.sh"

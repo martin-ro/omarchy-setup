@@ -4,7 +4,9 @@ set -e
 
 DOTFILES="$HOME/dotfiles"
 
-if [ ! -d "$DOTFILES/.git" ]; then
+if [ -d "$DOTFILES/.git" ]; then
+  git -C "$DOTFILES" pull --ff-only
+else
   git clone https://github.com/martin-ro/dotfiles.git "$DOTFILES"
 fi
 
