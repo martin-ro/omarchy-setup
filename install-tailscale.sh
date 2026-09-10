@@ -8,3 +8,10 @@ if tailscale status --json 2>/dev/null | grep -q '"BackendState": "Running"'; th
 else
   omarchy install service tailscale
 fi
+
+if tailscale debug prefs 2>/dev/null | grep -q '"RunSSH": true'; then
+  echo "Tailscale SSH already enabled."
+else
+  echo "Enabling Tailscale SSH..."
+  sudo tailscale set --ssh
+fi
