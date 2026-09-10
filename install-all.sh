@@ -24,5 +24,6 @@ fi
 . "$DIR/install-dotfiles.sh"
 . "$DIR/install-aliases.sh"
 . "$DIR/install-shell.sh"
+. "$DIR/install-default-agent.sh"
 
 echo "Done."
