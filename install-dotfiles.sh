@@ -16,8 +16,28 @@ AFTER_HYPR="$(git -C "$DOTFILES" rev-parse HEAD:hyprland)"
 HYPR_CHANGED=false
 [ "$BEFORE_HYPR" = "$AFTER_HYPR" ] || HYPR_CHANGED=true
 
-mkdir -p "$HOME/.config/yazi" "$HOME/.config/hypr" "$HOME/.config/herdr" "$HOME/.config/lazygit"
-rm -f "$HOME/.config/yazi/yazi.toml" "$HOME/.config/herdr/config.toml" "$HOME/.config/lazygit/config.yml" "$HOME/.bash_aliases"
+mkdir -p \
+  "$HOME/.agents" \
+  "$HOME/.claude" \
+  "$HOME/.codex" \
+  "$HOME/.grok/rules" \
+  "$HOME/.pi/agent" \
+  "$HOME/.config/yazi" \
+  "$HOME/.config/hypr" \
+  "$HOME/.config/herdr" \
+  "$HOME/.config/lazygit"
+rm -f \
+  "$HOME/.agents/AGENTS.md" \
+  "$HOME/.claude/CLAUDE.md" \
+  "$HOME/.codex/AGENTS.md" \
+  "$HOME/.codex/CODEX.md" \
+  "$HOME/.grok/rules/AGENTS.md" \
+  "$HOME/.pi/agent/AGENTS.md" \
+  "$HOME/.pi/agent/APPEND_SYSTEM.md" \
+  "$HOME/.config/yazi/yazi.toml" \
+  "$HOME/.config/herdr/config.toml" \
+  "$HOME/.config/lazygit/config.yml" \
+  "$HOME/.bash_aliases"
 
 for FILE in looknfeel.lua bindings.lua; do
   SOURCE="$DOTFILES/hyprland/.config/hypr/$FILE"
@@ -29,7 +49,7 @@ for FILE in looknfeel.lua bindings.lua; do
   fi
 done
 
-stow --restow --dir="$DOTFILES" --target="$HOME" yazi hyprland bash herdr lazygit
+stow --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit
 
 if [ "$HYPR_CHANGED" = true ]; then
   hyprctl reload
