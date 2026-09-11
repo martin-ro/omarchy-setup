@@ -22,6 +22,8 @@ fi
 . "$DIR/install-herdr.sh"
 . "$DIR/install-stow.sh"
 . "$DIR/install-yazi.sh"
+# Required by the Lazygit configuration in dotfiles.
+. "$DIR/install-git-delta.sh"
 . "$DIR/install-dotfiles.sh"
 . "$DIR/install-aliases.sh"
 . "$DIR/install-shell.sh"
