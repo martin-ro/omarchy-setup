@@ -26,5 +26,6 @@ fi
 . "$DIR/install-codex.sh"
 . "$DIR/install-claude-code.sh"
 . "$DIR/install-pi.sh"
+. "$DIR/install-axi-skills.sh"
 
 echo "Done."
