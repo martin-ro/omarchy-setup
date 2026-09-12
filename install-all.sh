@@ -19,6 +19,7 @@ fi
 . "$DIR/install-yazi.sh"
 . "$DIR/install-git-delta.sh"
 . "$DIR/install-dotfiles.sh"
+. "$DIR/install-omarchy-timers.sh"
 . "$DIR/install-aliases.sh"
 . "$DIR/install-shell.sh"
 . "$DIR/install-herdr.sh"
