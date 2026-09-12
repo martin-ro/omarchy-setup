@@ -3,10 +3,12 @@
 set -e
 
 echo "Setting up GitHub..."
-if command -v gh >/dev/null && gh auth status --hostname github.com >/dev/null 2>&1; then
+command -v gh >/dev/null || omarchy pkg add github-cli
+if gh auth status --hostname github.com >/dev/null 2>&1; then
   echo "GitHub already authenticated."
 else
-  command -v gh >/dev/null || omarchy pkg add github-cli
   gh auth login --hostname github.com --git-protocol https --web
-  gh auth setup-git --hostname github.com
 fi
+
+gh config set git_protocol https --host github.com
+gh auth setup-git --hostname github.com
