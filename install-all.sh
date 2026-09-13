@@ -11,6 +11,8 @@ if [ "$BEFORE_PULL" != "$AFTER_PULL" ]; then
   exec "$DIR/install-all.sh" "$@"
 fi
 
+. "$DIR/install-omarchy-update.sh"
+. "$DIR/install-bluetooth.sh"
 . "$DIR/install-chromium-account.sh"
 . "$DIR/install-tailscale.sh"
 . "$DIR/install-bitwarden.sh"
@@ -29,5 +31,6 @@ fi
 . "$DIR/install-pi.sh"
 . "$DIR/install-laravel-cloud.sh"
 . "$DIR/install-axi-skills.sh"
+. "$DIR/install-voxtype.sh"
 
 echo "Done."
