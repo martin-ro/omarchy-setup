@@ -3,7 +3,13 @@
 set -e
 
 echo "Setting up Tailscale..."
-if command -v tailscale >/dev/null && tailscale status --json 2>/dev/null | grep -q '"BackendState": "Running"'; then
+command -v tailscale >/dev/null || omarchy pkg add tailscale
+if ! command -v tailscale >/dev/null; then
+  echo "Tailscale is not installed."
+  exit 1
+fi
+
+if tailscale status --json 2>/dev/null | grep -q '"BackendState": "Running"'; then
   echo "Tailscale already connected."
 else
   omarchy install service tailscale
