@@ -13,9 +13,3 @@ if ! command -v cloud >/dev/null; then
   mkdir -p "$HOME/.local/bin"
   ln -sfn "$(composer global config bin-dir --absolute --quiet)/cloud" "$HOME/.local/bin/cloud"
 fi
-
-if [ -f "$HOME/.config/cloud/config.json" ]; then
-  echo "Laravel Cloud already authenticated."
-else
-  cloud auth
-fi
