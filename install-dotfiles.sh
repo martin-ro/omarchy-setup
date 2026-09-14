@@ -38,7 +38,19 @@ for FILE in looknfeel.lua bindings.lua; do
   fi
 done
 
-stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit
+NVIM_SRC="$DOTFILES/nvim/.config/nvim/init.lua"
+NVIM_DST="$HOME/.config/nvim/init.lua"
+if [ -e "$HOME/.config/nvim" ] && [ "$(readlink -f "$NVIM_DST" 2>/dev/null)" != "$(readlink -f "$NVIM_SRC")" ]; then
+  BK="$HOME/nvim-backup-$(date +%Y%m%d%H%M%S)"
+  mv "$HOME/.config/nvim" "$BK"
+  if [ -d "$HOME/.local/share/nvim" ]; then
+    mv "$HOME/.local/share/nvim" "$BK-share"
+  fi
+fi
+
+stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim
+
+nvim --headless "+Lazy! sync" +qa || echo "nvim plugin sync will finish on first launch"
 
 if [ "$HYPR_CHANGED" = true ]; then
   hyprctl reload
