@@ -56,7 +56,7 @@ if [ -e "$HOME/.config/nvim" ] && [ ! -L "$NVIM_DST" ]; then
   fi
 fi
 
-stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim starship
+stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim starship bin
 
 nvim --headless "+Lazy! sync" +qa || echo "nvim plugin sync will finish on first launch"
 
