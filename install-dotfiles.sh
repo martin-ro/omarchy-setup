@@ -30,6 +30,7 @@ rm -f \
   "$HOME/.config/yazi/yazi.toml" \
   "$HOME/.config/herdr/config.toml" \
   "$HOME/.config/lazygit/config.yml" \
+  "$HOME/.config/starship.toml" \
   "$HOME/.bash_aliases"
 for FILE in looknfeel.lua bindings.lua; do
   SOURCE="$DOTFILES/hyprland/.config/hypr/$FILE"
@@ -55,7 +56,7 @@ if [ -e "$HOME/.config/nvim" ] && [ ! -L "$NVIM_DST" ]; then
   fi
 fi
 
-stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim
+stow --no-folding --restow --dir="$DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim starship
 
 nvim --headless "+Lazy! sync" +qa || echo "nvim plugin sync will finish on first launch"
 
