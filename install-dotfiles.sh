@@ -2,17 +2,20 @@
 
 set -e
 
-DOTFILES="$HOME/dotfiles"
+DOTFILES="$HOME/Work/dotfiles"
 BEFORE_HYPR=""
 
 if [ -d "$DOTFILES/.git" ]; then
   BEFORE_HYPR="$(git -C "$DOTFILES" rev-parse HEAD:hyprland 2>/dev/null || true)"
-  git -C "$DOTFILES" pull --ff-only
-else
+  if git -C "$DOTFILES" rev-parse --abbrev-ref @{upstream} >/dev/null 2>&1; then
+    git -C "$DOTFILES" pull --ff-only
+  fi
+elif [ ! -e "$DOTFILES" ]; then
+  mkdir -p "$(dirname "$DOTFILES")"
   git clone https://github.com/martin-ro/dotfiles.git "$DOTFILES"
 fi
 
-AFTER_HYPR="$(git -C "$DOTFILES" rev-parse HEAD:hyprland)"
+AFTER_HYPR="$(git -C "$DOTFILES" rev-parse HEAD:hyprland 2>/dev/null || true)"
 HYPR_CHANGED=false
 [ "$BEFORE_HYPR" = "$AFTER_HYPR" ] || HYPR_CHANGED=true
 
@@ -38,9 +41,13 @@ for FILE in looknfeel.lua bindings.lua; do
   fi
 done
 
-NVIM_SRC="$DOTFILES/nvim/.config/nvim/init.lua"
+OLD_DOTFILES="$HOME/dotfiles"
+if [ -d "$OLD_DOTFILES" ] && [ "$(readlink -f "$OLD_DOTFILES")" != "$(readlink -f "$DOTFILES")" ]; then
+  stow --no-folding -D --dir="$OLD_DOTFILES" --target="$HOME" agents yazi hyprland bash herdr lazygit nvim || true
+fi
+
 NVIM_DST="$HOME/.config/nvim/init.lua"
-if [ -e "$HOME/.config/nvim" ] && [ "$(readlink -f "$NVIM_DST" 2>/dev/null)" != "$(readlink -f "$NVIM_SRC")" ]; then
+if [ -e "$HOME/.config/nvim" ] && [ ! -L "$NVIM_DST" ]; then
   BK="$HOME/nvim-backup-$(date +%Y%m%d%H%M%S)"
   mv "$HOME/.config/nvim" "$BK"
   if [ -d "$HOME/.local/share/nvim" ]; then
