@@ -25,6 +25,7 @@ fi
 . "$DIR/install-dotfiles.sh"
 . "$DIR/install-theme-switcher.sh"
 . "$DIR/install-omarchy-timers.sh"
+. "$DIR/install-youtube-shelf.sh"
 . "$DIR/install-aliases.sh"
 . "$DIR/install-shell.sh"
 . "$DIR/install-herdr.sh"
